@@ -4,6 +4,7 @@ import com.game.constant.CommanConstant;
 import com.game.image.ImageUtility;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -46,9 +47,22 @@ public class TileMap {
                 int x = col * tileSize;
                 int y = row * tileSize;
 
+                // TEMP IMAGE
+                BufferedImage image = switch (map[row][col]){
+                    case 'X' -> ImageUtility.WALL;
+                    case 'r' -> ImageUtility.RED_GHOST;
+                    case 'b' -> ImageUtility.BLUE_GHOST;
+                    case 'p' -> ImageUtility.PINK_GHOST;
+                    case 'o' -> ImageUtility.ORANGE_GHOST;
+                    case 'P' -> ImageUtility.PACMAN_DOWN;
+                    default -> null;
+                };
+
                 // DRAW WALL IF TRUE
-                if (map[row][col] == 'X') {
-                    g.drawImage(ImageUtility.WALL, x, y, tileSize, tileSize, null);
+                if (image != null) {
+                    g.drawImage(image, x, y, tileSize, tileSize, null);
+                } else if (map[row][col] == ' ') {
+                    g.drawImage(ImageUtility.FOOD, x+14, y+14, 4, 4, null);
                 }
 
             }
