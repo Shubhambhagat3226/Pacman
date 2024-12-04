@@ -19,7 +19,7 @@ public class Level_1 extends GameState{
 
         // TILE MAP
         tileMap = new TileMap();
-        tileMap.loadMap("/map/map.txt");
+        tileMap.loadMap("/map/map1.txt");
     }
 
     @Override
